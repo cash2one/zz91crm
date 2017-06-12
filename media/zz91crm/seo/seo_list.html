@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>所有用户</title>
+		<style>
+			table{
+              margin:0px;
+              border-collapse:collapse;
+              border-spacing: 2px;
+                  }
+            #form{
+            	 display:inline-block;
+            }
+            td  {  
+              text-align:center;  
+             }  
+		</style>
+	</head>
+	<body>
+	<div>
+	   <form action="/seo/list.html" method="get" id="form">
+	   		邮箱<input type="text" name="com_email"/>
+	   		门市部<input type="text" name="com_msb"/>
+	   		<input type="submit" value="搜索"/>
+	   </form>&nbsp;&nbsp;
+	   <form action="/seo/add.html" method="get" id="form">
+           <input type="submit" value="增加"/>
+       </form>
+       <table width="100%" border="1"  cellpadding="1" cellspacing="1" bgcolor="white" >
+           <thead>
+              <tr>
+                  <td aligan="center" nowrap="nowrap" bgcolor="#ebebeb">com_id</td>
+                  <td aligan="center" nowrap="nowrap" bgcolor="#ebebeb">com_email</td>
+                  <td aligan="center" nowrap="nowrap" bgcolor="#ebebeb">com_msb</td>
+                  <td aligan="center" nowrap="nowrap" bgcolor="#ebebeb">price</td>
+                  <td aligan="center" nowrap="nowrap" bgcolor="#ebebeb">baidu_sl</td>
+                  <td aligan="center" nowrap="nowrap" bgcolor="#ebebeb">baidu_fanlian</td>
+                  <td aligan="center" nowrap="nowrap" bgcolor="#ebebeb">personid</td>
+                  <td aligan="center" nowrap="nowrap" bgcolor="#ebebeb">关键词[一键更新]</td>
+                  <td aligan="center" nowrap="nowrap" bgcolor="#ebebeb">操作</td>
+              </tr>
+           </thead>
+           <tbody>
+              {% for list in listall %}
+                  <tr>
+                      <td aligan="center" nowrap="nowrap" bgcolor="#FFFFFF"><a href="?com_id={{list.com_id}}">{{list.com_id}}</a></td>
+                      <td aligan="center" nowrap="nowrap" bgcolor="#FFFFFF"><a href="?com_email={{list.com_email}}">{{list.com_email}}</a></td>
+                      <td aligan="center" nowrap="nowrap" bgcolor="#FFFFFF"><a href="?com_msb={{list.com_msb}}">{{list.com_msb}}</a></td>
+                      <td aligan="center" nowrap="nowrap" bgcolor="#FFFFFF"><a href="?price={{list.price}}">{{list.price}}</a></td>
+                      <td aligan="center" nowrap="nowrap" bgcolor="#FFFFFF"><a href="?baidu_sl={{list.baidu_sl}}">{{list.baidu_sl}}</a></td>
+                      <td aligan="center" nowrap="nowrap" bgcolor="#FFFFFF"><a href="?baidu_fanlian={{list.baidu_fanlian}}">{{list.baidu_fanlian}}</a></td>
+                      <td aligan="center" nowrap="nowrap" bgcolor="#FFFFFF"><a href="?personid={{list.personid}}">{{list.personid}}</a></td>
+                      <td aligan="center" nowrap="nowrap" bgcolor="#FFFFFF">
+                      	<table width="100%" border="1" cellspacing="1" cellpadding="5" bgcolor="white">
+                      	<thead>
+                      		<tr>
+                      			<td aligan="center" nowrap="nowrap" bgcolor="#ebebeb">key</td>
+                      			<td aligan="center" nowrap="nowrap" bgcolor="#ebebeb">百度排名</td>
+                      			<td aligan="center" nowrap="nowrap" bgcolor="#ebebeb">达标要求</td>
+                      			<td aligan="center" nowrap="nowrap" bgcolor="#ebebeb">过期时间</td>
+                      			<td aligan="center" nowrap="nowrap" bgcolor="#ebebeb">购买金额</td>
+                      			<td aligan="center" nowrap="nowrap" bgcolor="#ebebeb">历史</td>
+                      		</tr>
+                      	</thead>
+                      	<tbody>
+                      		{%for k in list.keywordslist%}
+                      		<tr>
+                      			<td aligan="center" nowrap="nowrap" bgcolor="#FFFFFF"><a>{{k.keywords}}</a></td>
+                      			<td aligan="center" nowrap="nowrap" bgcolor="#FFFFFF"><a>{{k.baidu_ranking}}</a></td>
+                      			<td aligan="center" nowrap="nowrap" bgcolor="#FFFFFF"><a>{{k.target_require}}</a></td>
+                      			<td aligan="center" nowrap="nowrap" bgcolor="#FFFFFF"><a>{{k.expire_time}}</a></td>
+                      			<td aligan="center" nowrap="nowrap" bgcolor="#FFFFFF"><a>{{k.price}}</a></td>
+                      			<td aligan="center" nowrap="nowrap" bgcolor="#FFFFFF"><a>{{k.gmt_created}}</a></td>
+                      		</tr>
+                      		{%endfor%}
+                      	</tbody>
+                      </table>
+                     </td>
+                      <td aligan="center" nowrap="nowrap" bgcolor="#FFFFFF">
+                      	<span><a href="mod.html?id={{list.id}}">修改</a></span>
+                      	<span><a href="del.html?id={{list.id}}" onclick="return confirm('确实要删除吗？')">删除</a></span>
+                      </td>
+                  </tr>
+              {% endfor %}
+           </tbody>
+       </table>
+	</div>	
+	<div>
+		<form>
+			共{{listcount}} 条记录 {{page}}/{{page_listcount}} 页 &nbsp;&nbsp; {% if firstpage %}
+		    <font color="gray">上一页</font>{%else%}<a href="?page={{prvpage}}">上一页</a>{%endif%} {%for p in page_range%} {%if p.nowpage%}
+			<span class='current'>{{p.number}}</span>&nbsp; {%else%}
+			<a href="?page={{p.number}}">{{p.number}}&nbsp;</a> {%endif%} {%endfor%} {% if lastpage%}
+			<font color="gray">下一页</font>{%else%}<a href="?page={{nextpage}}&{{searchurl}}">下一页</a>{%endif%}&nbsp;&nbsp;&nbsp; {%if flag%}
+			<input type="hidden" name="flag" value="{{flag}}">{%endif%} {%if writer%}
+			<input type="hidden" name="writer" value="{{writer}}">{%endif%}
+			<input type="hidden" name="page_listcount" value="{{page_listcount}}">&nbsp;&nbsp; 去第
+			<input type="text" name="page" style="width:28px" value="{{page}}"> /{{page_listcount}} 页
+			<input type="submit" style="display:none"> &nbsp;&nbsp;
+			<a href='?page=1'>首页</a><a href='?page={{page_listcount}}'>尾页</a>
+		</form>
+	</div>
+	</div>
+	</body>
+</html>

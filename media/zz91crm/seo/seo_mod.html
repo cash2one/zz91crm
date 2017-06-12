@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改信息</title>
+</head>
+<body>
+    <div>
+       <form action="/seo/mod.html?id={{result.id}}" method="post">
+           com_id<input type="text" name="com_id" value="{{result.com_id}}"/><br />
+           com_email<input type="text" name="com_email" value="{{result.com_email}}"/><br />
+           com_msb<input type="text" name="com_msb" value="{{result.com_msb}}"/><br />
+           price<input type="text" name="price" value="{{result.price}}"/><br />
+           baidu_sl<input type="text" name="baidu_sl" value="{{result.baidu_sl}}"/><br />
+           baidu_fanlian<input type="text" name="baidu_fanlian" value="{{result.baidu_fanlian}}"/><br />
+           personid<input type="text" name="personid" value="{{result.personid}}"/><br />
+           <input type="submit" value="修改"/>
+       </form>
+    </div>
+</body>
+</html>

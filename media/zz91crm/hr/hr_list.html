@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>人事</title>
+
+		<style type="text/css">
+			.navPoint {
+				font-family: Webdings;
+				font-size: 9pt;
+				color: white;
+				cursor: hand;
+			}
+			
+			p {
+				font-size: 9pt;
+			}
+			
+			.tblbody {
+				BACKGROUND: #6699cc;
+				BORDER-BOTTOM: #30404f 2px solid;
+				BORDER-LEFT: #b8d2e9 2px solid;
+				BORDER-RIGHT: #30404f 2px solid;
+				BORDER-TOP: #b8d2e9 2px solid
+			}
+			
+			.tblLeftbody {
+				BACKGROUND: #8cbde7;
+				BORDER-BOTTOM: #30404f 2px solid;
+				BORDER-LEFT: #b8d2e9 2px solid;
+				BORDER-RIGHT: #30404f 0px solid;
+				BORDER-TOP: #b8d2e9 2px solid
+			}
+			
+			.tblbody {
+				BACKGROUND: #6699cc;
+				BORDER-BOTTOM: #30404f 2px solid;
+				BORDER-LEFT: #b8d2e9 2px solid;
+				BORDER-RIGHT: #30404f 2px solid;
+				BORDER-TOP: #b8d2e9 2px solid
+			}
+			
+			.tblLeftbody {
+				BACKGROUND: #8cbde7;
+				BORDER-BOTTOM: #30404f 2px solid;
+				BORDER-LEFT: #b8d2e9 2px solid;
+				BORDER-RIGHT: #30404f 0px solid;
+				BORDER-TOP: #b8d2e9 2px solid
+			}
+			
+			td {
+				font-size: 12px;
+			}
+			
+			.f {
+				font-size: 12px;
+				color: #FFFFFF;
+			}
+			
+		</style>
+		<style type="text/css">
+			.navPoint {
+				font-family: Webdings;
+				font-size: 9pt;
+				color: white;
+				cursor: hand;
+			}
+			
+			p {
+				font-size: 9pt;
+			}
+			
+			.tblbody {
+				BACKGROUND: #6699cc;
+				BORDER-BOTTOM: #30404f 2px solid;
+				BORDER-LEFT: #b8d2e9 2px solid;
+				BORDER-RIGHT: #30404f 2px solid;
+				BORDER-TOP: #b8d2e9 2px solid
+			}
+			
+			.tblLeftbody {
+				BACKGROUND: #8cbde7;
+				BORDER-BOTTOM: #30404f 2px solid;
+				BORDER-LEFT: #b8d2e9 2px solid;
+				BORDER-RIGHT: #30404f 0px solid;
+				BORDER-TOP: #b8d2e9 2px solid
+			}
+			
+			.tblbody {
+				BACKGROUND: #6699cc;
+				BORDER-BOTTOM: #30404f 2px solid;
+				BORDER-LEFT: #b8d2e9 2px solid;
+				BORDER-RIGHT: #30404f 2px solid;
+				BORDER-TOP: #b8d2e9 2px solid
+			}
+			
+			.tblLeftbody {
+				BACKGROUND: #8cbde7;
+				BORDER-BOTTOM: #30404f 2px solid;
+				BORDER-LEFT: #b8d2e9 2px solid;
+				BORDER-RIGHT: #30404f 0px solid;
+				BORDER-TOP: #b8d2e9 2px solid
+			}
+			
+			td {
+				font-size: 12px;
+			}
+			
+			.f {
+				font-size: 12px;
+				color: #FFFFFF;
+			}
+		</style>
+		<style type="text/css">
+			.moveover {
+				border-top-width: 1px;
+				border-right-width: 1px;
+				border-bottom-width: 1px;
+				border-left-width: 1px;
+				border-top-style: solid;
+				border-right-style: solid;
+				border-bottom-style: solid;
+				border-left-style: solid;
+				border-top-color: #FFFFFF;
+				border-right-color: #999999;
+				border-bottom-color: #999999;
+				border-left-color: #FFFFFF;
+			}
+			
+			.moveout {
+				border: 1px solid #ECE9D8;
+				cursor: hand;
+			}
+			
+			body,
+			td,
+			th {
+				font-size: 12px;
+			}
+		</style>
+		<link href="../../css.css" rel="stylesheet" type="text/css">
+		<script language="javascript" src="http://192.168.2.2/admin1/include/calendar.js"></script>
+		<script type="text/javascript" src="http://192.168.2.2/admin1/DatePicker.js"></script>
+		<script type="text/javascript" src="http://192.168.2.2/cn/sources/pop.js"></script>
+		<script type="text/javascript" src="http://192.168.2.2/admin1/include/b.js"></script>
+		<script type="text/javascript" src="http://192.168.2.2/admin1/main.js"></script>
+		<link href="http://192.168.2.2/admin1/datepicker.css" rel="stylesheet" type="text/css">
+		<script language="JavaScript">
+			function subchk() {
+				if(company_sec.secSubCatId.value == "") {
+					alert("请选择单位!\n");
+					company_sec.secSubCatId.focus();
+					return false;
+				}
+				if(company_sec.uname.value == "") {
+					alert("请输入用户名称!\n");
+					company_sec.uname.focus();
+					return false;
+				}
+				if(company_sec.password.value == "") {
+					alert("请输入登录密码!\n");
+					company_sec.password.focus();
+					return false;
+				}
+
+			}
+
+			function shezhizaizhi(obj, field, id) {
+				if(obj.value != "") {
+					window.open("station.html?"+field+"="+ obj.value +"&id=" + id, "personinfoa", "")
+				}
+			}
+
+			function dataout(frm) {
+				frm.outflag.value = "1"
+				frm.target = "personinfoa"
+				frm.submit();
+
+			}
+
+			function searchfrm(frm) {
+				frm.outflag.value = "0"
+				frm.target = ""
+				frm.submit();
+			}
+		</script>
+		<script language="JavaScript">
+			function subchk(frm) {
+				if(frm.realname.value == "") {
+					alert("请输入姓名！");
+					frm.realname.focus();
+					return false;
+				}
+				if(frm.uname.value == "") {
+					alert("请输入名字拼音(用户名)!\n");
+					frm.uname.focus();
+					return false;
+				}
+
+			}
+
+			function isnum(f) {
+				if(isNaN(f.value)) {
+					f.value = "";
+				}
+			}
+		</script>
+		<link href="../../inc/Style.css" rel="stylesheet" type="text/css">
+		<style type="text/css">
+			.buuton {
+				background-color: #99CC99;
+				border-top-width: 3px;
+				border-top-style: solid;
+				border-top-color: #DAEDDA;
+				height: 25px;
+			}
+			
+			.buutoff {
+				background-color: #CCCCCC;
+				border-top-width: 3px;
+				border-top-style: solid;
+				border-top-color: #f2f2f2;
+				height: 25px;
+			}
+			
+			form {
+				padding: 0px;
+				margin: 0px;
+			}
+			
+			.kuan {
+				border: 1px solid #CCC;
+				background-color: #FFF;
+				padding: 2px;
+			}
+			
+			.hl {
+				background-color: #ededec;
+			}
+			
+			.sl {
+				background-color: #e0edf7;
+			}
+		</style>
+	</head>
+
+	<body>
+		<table width="98%" height="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+			<tbody>
+				<tr>
+					<td height="23" bgcolor="E7EBDE">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tbody>
+								<tr>
+									<td width="100" height="23" nowrap="" background="http://192.168.2.2/admin1/newimages/shale_fill_1.gif"><img src="http://192.168.2.2/admin1/newimages/shale_arrowhead.gif" width="28" height="23" align="absmiddle">应聘人员列表</td>
+									<td width="21" background="http://192.168.2.2/admin1/newimages/shale_arrowhead.gif"><img src="http://192.168.2.2/admin1/newimages/shale_photo.gif" width="21" height="23"></td>
+									<td background="http://192.168.2.2/admin1/newimages/lm_ddd.jpg">&nbsp;</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td bgcolor="E7EBDE">
+						<table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+							<form name="form1" method="get" action="/hr/list.html">
+								<tbody>
+									<tr>
+										<td height="30">手机<input name="mobile" type="text" id="mobile" size="10">
+											姓名<input name="username" type="text" id="username" size="10">
+											邮箱<input name="email" type="text" id="email" size="10">
+											<select name="sex" id="sex">
+												<option value="">选择性别</option>
+												<option value="男">男</option>
+												<option value="女">女</option>
+											</select>
+											<script>
+												selectOption("sex", "")
+											</script>
+											录入人<select name="rpersonid" id="rpersonid">
+												<option value="">......</option>
+
+												<option value="342">刘晓芳</option>
+
+												<option value="927">钟建飞</option>
+
+												<option value="1391">徐春秀</option>
+
+												<option value="1399">陈辉辉</option>
+
+												<option value="1416">陈金凤</option>
+
+												<option value="1440">蒋翠</option>
+
+												<option value="1596">白云慧</option>
+
+												<option value="1613">卞丽</option>
+
+												<option value="1614">王钰</option>
+
+											</select>
+											<script>
+												selectOption("rpersonid", "")
+											</script>
+											所有者<select name="personid" id="personid">
+												<option value="">......</option>
+
+												<option value="176">符青青</option>
+
+												<option value="288">宋海波</option>
+
+												<option value="328">刘宁宁</option>
+
+												<option value="342">刘晓芳</option>
+
+												<option value="604">蒋秀琛</option>
+
+												<option value="927">钟建飞</option>
+
+												<option value="1371">王婷婷</option>
+
+												<option value="1391">徐春秀</option>
+
+												<option value="1399">陈辉辉</option>
+
+												<option value="1416">陈金凤</option>
+
+												<option value="1440">蒋翠</option>
+
+												<option value="1596">白云慧</option>
+
+												<option value="1613">卞丽</option>
+
+												<option value="1614">王钰</option>
+
+											</select>
+											<script>
+												selectOption("personid", "")
+											</script>
+										</td>
+									</tr>
+									<tr>
+										<td height="30">面谈时间从
+											<script language="javascript">
+												createDatePicker("fromdate", true, "", false, true, true, true)
+											</script>到
+											<script language="javascript">
+												createDatePicker("todate", true, "", false, true, true, true)
+											</script>
+											记录时间从
+											<script language="javascript">
+												createDatePicker("fdate", true, "", false, true, true, true)
+											</script>到
+											<script language="javascript">
+												createDatePicker("tdate", true, "", false, true, true, true)
+											</script>
+											
+											<select name="star" id="star">
+												<option value="">请选择星级</option>
+												<option value="5">5星</option>
+												<option value="4">4星</option>
+												<option value="3">3星</option>
+												<option value="2">2星</option>
+												<option value="1">1星</option>
+											</select>
+											<script>
+												selectOption("star", "")
+											</script>
+											邀约记录<select name="jl1" id="jl1">
+												<option value="">请选择...</option>
+												<option value="1705">确定面试</option>
+												<option value="1706">无意向</option>
+												<option value="1707">电话未接待跟进</option>
+												<option value="1708">考虑中需跟进</option>
+												<option value="1709">淘汰</option>
+											</select>
+											初试记录<select name="jl2" id="jl2">
+												<option value="">请选择...</option>
+												<option value="1801">放弃面试</option>
+												<option value="1802">录用</option>
+												<option value="1803">建议复试</option>
+												<option value="1804">淘汰</option>
+												<option value="1805">储备</option>
+											</select>
+											复试记录<select name="jl3" id="jl3">
+												<option value="">请选择...</option>
+												<option value="1901">录用</option>
+												<option value="1902">淘汰</option>
+												<option value="1903">储备</option>
+											</select>
+											报到记录<select name="jl4" id="jl4">
+												<option value="">请选择...</option>
+												<option value="2001">跟进中</option>
+												<option value="2002">报到</option>
+												<option value="2003">放弃报到</option>
+											</select><br>
+											 过程结束<select name="jl5" id="jl5">
+												<option value="">请选择...</option>
+												<option value="2101">流程结束</option>
+												<option value="2102">储备人才</option>
+											</select>
+											联系状态<select name="contactstat" id="contactstat">
+												<option value="">请选择...</option>
+												<option value="2201">在职中</option>
+												<option value="2202">求职中</option>
+												<option value="2203">短期不求职</option>
+											</select>
+											<input type="hidden" name="dotype" id="dotype" value="luyong">
+											<select name="orderstr" id="orderstr">
+												<option value="">选择排序</option>
+												<option value="1">面谈时间</option>
+												<option value="2">添加时间</option>
+											</select>
+											<script>
+												selectOption("orderstr", "")
+											</script>
+										</td>
+									</tr>
+									<tr>
+										<td height="30"><input type="button" name="Submit2" value="搜索" onclick="searchfrm(this.form)">
+											<input type="button" name="button5" id="button5" value="导出数据" onclick="dataout(this.form)">
+											<input name="outflag" type="hidden" id="outflag" value="0"></td>
+									</tr>
+								</tbody>
+							</form>
+						</table>
+						<form name="form1" method="get" action="/hr/list.html">
+							<table width="95%" height="90%" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#333333">
+								<tbody>
+									<tr>
+										<td valign="top" bgcolor="#F1F3ED">
+											<span onmouseover="DoHL()" onmouseout="DoLL()" onclick="DoSL();">
+                </span><span onmouseover="DoHL()" onmouseout="DoLL()" onclick="DoSL();">
+                </span><span onmouseover="DoHL()" onmouseout="DoLL()" onclick="DoSL();">
+                </span><span onmouseover="DoHL()" onmouseout="DoLL()" onclick="DoSL();">
+                </span><span onmouseover="DoHL()" onmouseout="DoLL()" onclick="DoSL();">
+                </span><span onmouseover="DoHL()" onmouseout="DoLL()" onclick="DoSL();">
+                </span><span onmouseover="DoHL()" onmouseout="DoLL()" onclick="DoSL();">
+                </span><span onmouseover="DoHL()" onmouseout="DoLL()" onclick="DoSL();">
+                </span><span onmouseover="DoHL()" onmouseout="DoLL()" onclick="DoSL();">
+                </span><span onmouseover="DoHL()" onmouseout="DoLL()" onclick="DoSL();">
+                </span><span onmouseover="DoHL()" onmouseout="DoLL()" onclick="DoSL();">
+                </span><span onmouseover="DoHL()" onmouseout="DoLL()" onclick="DoSL();">
+                </span><span onmouseover="DoHL()" onmouseout="DoLL()" onclick="DoSL();">
+                </span><span onmouseover="DoHL()" onmouseout="DoLL()" onclick="DoSL();">
+                </span><span onmouseover="DoHL()" onmouseout="DoLL()" onclick="DoSL();">
+                </span>
+											<table width="100%" border="0" cellpadding="2" cellspacing="1" bgcolor="#CCCCCC">
+												<tbody>
+													<tr bgcolor="#D0D8BE">
+														<td width="21">
+															<font color="#000000">&nbsp;</font>
+														</td>
+														<td nowrap="">星级</td>
+														<td nowrap="">手机</td>
+														<td nowrap="">姓名</td>
+														<td nowrap="">性别</td>
+
+														<td align="right" nowrap="">最高学历</td>
+														<td align="right" nowrap="">
+															<a href="?b_name=&amp;rn=&amp;dotype=luyong&amp;orderstr=&amp;orderstr1=1">面谈时间</a>
+														</td>
+														<td align="right" nowrap="">联系状态</td>
+
+														<td align="right" nowrap="">邀约记录</td>
+														<td align="right" nowrap="">初试记录</td>
+														<td align="right" nowrap="">复试记录</td>
+														<td align="right" nowrap="">报到记录</td>
+														<td align="right" nowrap="">简历来源</td>
+														<td align="right" nowrap="">过程结束</td>
+
+														<td align="right" nowrap="">其他联系方式</td>
+														<td align="right" nowrap="">电子信箱</td>
+
+														<td align="right" nowrap="">
+															<a href="?b_name=&amp;rn=&amp;dotype=luyong&amp;orderstr=&amp;orderstr1=2">时间记录</a>
+														</td>
+														<td align="right" nowrap="">最后跟进人员</td>
+														<td align="right" nowrap="">所有者</td>
+
+														<td align="right" nowrap="">
+															<font color="#000000">操作</font>
+														</td>
+													</tr>
+													{%for list in listall%}
+													<tr bgcolor="#ffffff">
+														<td><input name="cbb" id="cbb{{list.id}}" type="checkbox" value="{{list.id}}"> </td>
+														<td nowrap="">{{list.star}}</td>
+														<td nowrap="">{{list.mobile}}</td>
+														<td nowrap="">
+															<a href="usershow.html?uid={{list.id}}" target="_blank">{{list.username}}</a>
+														</td>
+														<td nowrap="">{{list.sex}}</td>
+														<td align="right" nowrap="">{{list.label}}</td>
+														<td align="right" nowrap="">{{list.interviewTime}}</td>
+														<td align="right" nowrap="">
+															<select name="station{{list.id}}" id="station{{list.id}}" onchange="shezhizaizhi(this,'station',{{list.id}})">
+																<option value="">请选择...</option>
+																<option value="1501">在职中</option>
+																<option value="150101">求职中</option>
+																<option value="1502">短期不求职</option>
+															</select>
+															<script>
+																selectOption("station{{list.id}}", "{{list.station}}")
+															</script>
+														</td>
+														<td align="right" nowrap="">
+															<select name="jl1{{list.id}}" id="jl1{{list.id}}" onchange="shezhizaizhi(this,'jl1',{{list.id}})">
+																<option value="">请选择...</option>
+																<option value="1705">确定面试</option>
+																<option value="1706">无意向</option>
+																<option value="1707">电话未接待跟进</option>
+																<option value="1708">考虑中需跟进</option>
+																<option value="1709">淘汰</option>
+															</select>
+															<script>
+																selectOption("jl1{{list.id}}", "{{list.jl1}}")
+															</script>
+														</td>
+														<td align="right" nowrap="">
+															<select name="jl2{{list.id}}" id="jl2{{list.id}}" onchange="shezhizaizhi(this,'jl2',{{list.id}})">
+																<option value="">请选择...</option>
+																<option value="1801">放弃面试</option>
+																<option value="1802">录用</option>
+																<option value="1803">建议复试</option>
+																<option value="1804">淘汰</option>
+																<option value="1805">储备</option>
+															</select>
+															<script>
+																selectOption("jl2{{list.id}}", "{{list.jl2}}")
+															</script>
+														</td>
+														<td align="right" nowrap="">
+															<select name="jl3{{list.id}}" id="jl3{{list.id}}" onchange="shezhizaizhi(this,'jl3',{{list.id}})">
+																<option value="">请选择...</option>
+																<option value="1901">录用</option>
+																<option value="1902">淘汰</option>
+																<option value="1903">储备</option>
+															</select>
+															<script>
+																selectOption("jl3{{list.id}}", "{{list.jl3}}")
+															</script>
+														</td>
+														<td align="right" nowrap="">
+															<select name="jl4{{list.id}}" id="jl4{{list.id}}" onchange="shezhizaizhi(this,'jl4',{{list.id}})">
+																<option value="">请选择...</option>
+																<option value="2001">跟进中</option>
+																<option value="2002">报到</option>
+																<option value="2003">放弃报到</option>
+															</select>
+															<script>
+																selectOption("jl4{{list.id}}", "{{list.jl4}}")
+															</script>
+														</td>
+														<td align="right" nowrap="">智联投递<br>
+															<!--<a href="user_historybz.asp?uid={{list.id}}" target="_blank">添加说明</a>-->
+														</td>
+														<td align="right" nowrap="">
+															<select name="jl5{{list.id}}" id="jl5{{list.id}}" onchange="shezhizaizhi(this,'jl5',{{list.id}})">
+																<option value="">请选择...</option>
+																<option value="2101">流程结束</option>
+																<option value="2102">储备人才</option>
+															</select>
+															<script>
+																selectOption("jl5{{list.id}}", "{{list.jl5}}")
+															</script>
+														</td>
+														<td align="right" nowrap="">{{list.othercontact}}</td>
+														<td align="right" nowrap="">{{list.email}}</td>
+
+														<td align="right" nowrap="">
+															{{list.gmt_created}}
+														</td>
+														<td align="right" nowrap="">
+															{{list.realname3}}
+														</td>
+														<td align="right" nowrap="">
+															{{list.realname}}
+														</td>
+
+														<td align="right" nowrap="">
+
+															<a href="usershow_history.html?uid={{list.id}}" target="_blank">过程记录</a> |
+															<a href="mod.html?id={{list.id}}" target="_blank">修改</a>
+														</td>
+														{%endfor%}
+													</tr>
+													<script language="JavaScript">
+														function showmiantime(id) {
+															var obj = document.getElementById("personinfoa" + id)
+															if(obj.style.display == "") {
+																obj.style.display = "none"
+															} else {
+																obj.style.display = ""
+															}
+														}
+
+														function CheckAll(form) {
+															for(var i = 0; i < form.elements.length; i++) {
+																var e = form.elements[i];
+																if(e.name.substr(0, 3) == 'cbb')
+																	e.checked = form.cball.checked;
+															}
+														}
+
+														function postAll(form, promptText, value) {
+															selectcb = "0"
+															for(var i = 0; i < form.elements.length; i++) {
+																var e = form.elements[i];
+
+																if(e.name.substr(0, 3) == 'cbb')
+																	if(e.checked == true) {
+																		var selectcb = selectcb + "," + e.value
+																	}
+
+															}
+
+															form.selectcb.value = selectcb.substr(2)
+															if(selectcb == "0") {
+																alert("选择你要的信息！")
+																return false
+															} else {
+																if(confirm(promptText)) {
+																	form.dostay.value = value
+																	form.submit()
+																}
+															}
+
+														}
+
+														function cbplay(form) {
+															selectcb = "0"
+															for(var i = 0; i < form.elements.length; i++) {
+																var e = form.elements[i];
+
+																if(e.name.substr(0, 3) == 'cbb')
+																	if(e.checked == true) {
+																		var selectcb = selectcb + "," + e.value
+																	}
+
+															}
+															//alert (selectcb)
+															form.selectcb.value = selectcb.substr(2)
+															if(selectcb == '0') {
+																alert("选择你要改变的信息！")
+																return false
+															} else if(form.stay.value == "") {
+																alert("请选择发布状态！")
+																return false
+															} else {
+
+																form.dostay.value = "dochange"
+																form.submit()
+
+															}
+														}
+
+														function delitem(form) {
+															selectcb = "0"
+															for(var i = 0; i < form.elements.length; i++) {
+																var e = form.elements[i];
+
+																if(e.name.substr(0, 3) == 'cbb')
+																	if(e.checked == true) {
+																		var selectcb = selectcb + "," + e.value
+																	}
+
+															}
+
+															form.selectcb.value = selectcb.substr(2)
+															if(selectcb == "0") {
+																alert("选择你要删除的信息！")
+																return false
+															} else {
+																if(confirm("删除这些信息?")) {
+																	form.dostay.value = "delitem"
+																	form.submit()
+																}
+															}
+
+														}
+													</script>
+													<tr bgcolor="#F1F3ED">
+														<td colspan="27" align="right">
+															<table width="100%" border="0" cellspacing="0" cellpadding="0">
+																<tbody>
+																	<tr>
+																		<td><input name="cball" type="checkbox" value="" onclick="CheckAll(this.form)"> 全选
+
+																			<input type="button" name="button" id="button" value="删除" onclick="return delitem(this.form)">
+																			<input type="button" name="button4" id="button4" value="分配给" onclick="postAll(this.form,'确实要分配吗?','assignto')">
+																			<select name="topersonid" id="topersonid">
+																				<option value="">请选择...</option>
+
+																				<option value="176">符青青</option>
+
+																				<option value="288">宋海波</option>
+
+																				<option value="328">刘宁宁</option>
+
+																				<option value="342">刘晓芳</option>
+
+																				<option value="604">蒋秀琛</option>
+
+																				<option value="927">钟建飞</option>
+
+																				<option value="1371">王婷婷</option>
+
+																				<option value="1391">徐春秀</option>
+
+																				<option value="1399">陈辉辉</option>
+
+																				<option value="1416">陈金凤</option>
+
+																				<option value="1440">蒋翠</option>
+
+																				<option value="1596">白云慧</option>
+
+																				<option value="1613">卞丽</option>
+
+																				<option value="1614">王钰</option>
+
+																			</select>
+
+																			<input type="button" name="button2" id="button2" value="放到我的库" onclick="postAll(this.form,'确实要放到我的库吗?','tomy')">
+																			<input type="button" name="button3" id="button3" value="放入公海" onclick="postAll(this.form,'确实要放入公海吗?','gonghai')"></td>
+																		<td align="right"><input type="hidden" name="dostay">
+																			<input type="hidden" name="selectcb">
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+
+											<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+												<tbody>
+													<tr>
+														<td>
+															<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+																<tbody>
+																	<tr>
+																		页次:<strong><font color="#FF0000">{{page}}</font></strong>/
+																		<font color="#FF0000">{{page_listcount}}</font> 每页:{{limitNum}}
+																		<font color="#FF0000"></font> 共计:
+																		<font color="#FF0000">{{listcount}}</font>
+
+																		{% if firstpage %}
+																		<font color="gray">上一页</font>{%else%}
+																		<a href="?page={{prvpage}}">上一页</a>{%endif%} {%for p in page_range%} {%if p.nowpage%}
+																		<span class='current'>{{p.number}}</span>&nbsp; {%else%}
+																		<a href="?page={{p.number}}">{{p.number}}&nbsp;</a> {%endif%} {%endfor%} {% if lastpage%}
+																		<font color="gray">下一页</font>{%else%}
+																		<a href="?page={{nextpage}}&{{searchurl}}">下一页</a>{%endif%}&nbsp;&nbsp;&nbsp; {%if flag%}
+																		<input type="hidden" name="flag" value="{{flag}}">{%endif%} {%if writer%}
+																		<input type="hidden" name="writer" value="{{writer}}">{%endif%}
+																		<input type="hidden" name="page_listcount" value="{{page_listcount}}">&nbsp;&nbsp; 去第
+																		<input type="text" name="page" style="width:28px" value="{{page}}"> /{{page_listcount}} 页
+																		<input type="submit" style="display:none"> &nbsp;&nbsp;
+																		<a href='?page=1'>首页</a>
+																		<a href='?page={{page_listcount}}'>尾页</a>
+																	</tr>
+																</tbody>
+															</table>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tbody>
+								<tr>
+									<td>&nbsp;</td>
+								</tr>
+							</tbody>
+						</table>
+						<iframe id="personinfoa" name="personinfoa" style="HEIGHT: 0px; VISIBILITY: inherit; WIDTH: 0px; Z-INDEX: 2" frameborder="0" src=""></iframe>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</body>
+
+</html>

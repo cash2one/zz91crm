@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>招聘记录</title>
+		<link href="http://192.168.2.2/admin1/css.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="http://192.168.2.2/cn/sources/pop.js"></script>
+		<script language="JavaScript" src="http://192.168.2.2/admin1/main.js"></script>
+		<script language="JavaScript" type="text/javascript" src="http://192.168.2.2/admin1/include/JSDateFunction.js"></script>
+		<script language="javascript" src="http://192.168.2.2/admin1/include/calendar.js"></script>
+		<script type="text/javascript" src="http://192.168.2.2/admin1/include/b.js"></script>
+		<script language="javascript" src="http://192.168.2.2/admin1/DatePicker.js"></script>
+		<script language="JavaScript">
+			function subchk(frm) {
+				if(frm.contactstat.value == "") {
+					alert("请选择联系状态！")
+					frm.contactstat.focus();
+					return false;
+				}
+				var getradio = GetValueChoose(document.getElementsByName("selectjl"))
+				if(getradio == "") {
+					alert("必须选择一个记录!");
+
+					return false;
+				} else {
+					var slea = document.getElementById("jl" + getradio)
+					if(slea.value == "") {
+						alert("请选择记录情况!");
+						slea.focus();
+						return false;
+					}
+				}
+				var objstar = GetValueChoose(document.getElementsByName("star"))
+				if(objstar == "") {
+					alert("请选择一个星级!");
+					return false;
+				}
+
+			}
+
+			function GetValueChoose(elementname) {
+				var sValue = "";
+				var tmpels = elementname;
+				for(var i = 0; i < tmpels.length; i++) {
+					if(tmpels[i].checked) {
+						sValue = tmpels[i].value;
+					}
+				}
+				return sValue;
+			}
+		</script>
+		<link href="http://192.168.2.2/admin1/Crmlocal/datepicker.css" rel="stylesheet" type="text/css">
+		<style>
+			.input {
+				width: 150px;
+			}
+		</style>
+		<link href="http://192.168.2.2/admin1/inc/Style.css" rel="stylesheet" type="text/css">
+	</head>
+
+	<body bgcolor="7386A5" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"><iframe id="CalFrame" name="CalFrame" frameborder="0" src="http://192.168.2.2/admin1/include/calendar.htm" style="display:none;position:absolute;z-index:100" width="144" height="192"></iframe>
+
+		<table width="100%" height="95%" border="0" cellpadding="0" cellspacing="0">
+			<tbody>
+				<tr>
+					<td height="6">
+					</td>
+				</tr>
+				<tr>
+					<td height="100%" valign="top">
+						<table width="98%" height="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+							<tbody>
+								<tr>
+									<td height="23" bgcolor="E7EBDE">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tbody>
+												<tr>
+													<td width="100" height="23" nowrap="" background="http://192.168.2.2/admin1/newimages/shale_fill_1.gif"><img src="http://192.168.2.2/admin1/newimages/shale_arrowhead.gif" width="28" height="23" align="absmiddle">基本信息</td>
+													<td width="21" background="http://192.168.2.2/admin1/newimages/shale_fill_1.gif"><img src="http://192.168.2.2/admin1/newimages/shale_photo.gif" width="21" height="23"></td>
+													<td background="http://192.168.2.2/admin1/newimages/lm_ddd.jpg">&nbsp;</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td bgcolor="E7EBDE"><br>
+										<table width="800" border="0" align="center" cellpadding="10" cellspacing="1" bgcolor="#CCCCCC">
+											<tbody>
+												<tr>
+													<td bgcolor="#F1F3ED">
+														<table width="100%" border="0" cellspacing="0" cellpadding="5">
+															<tbody>
+																<tr>
+																	<td bgcolor="#CCCCCC">人员基本信息</td>
+																</tr>
+															</tbody>
+														</table>
+														<table width="100%" border="0" align="center" cellpadding="4" cellspacing="1" bgcolor="#999999">
+															<form action="usershow.html?uid={{result.id}}" method="post" name="company_sec" onsubmit="return subchk(this)">
+																<tbody>
+																	<tr>
+																		<td align="right" bgcolor="#FFFFFF">手机号码</td>
+																		<td bgcolor="#FFFFFF">{{result.mobile}}
+																			<input name="uid" type="hidden" id="uid" value="85582">
+																			<input name="edit" type="hidden" id="edit" value="1"></td>
+																	</tr>
+																	<tr>
+																		<td align="right" bgcolor="#FFFFFF">姓名</td>
+																		<td bgcolor="#FFFFFF">{{result.username}}
+																		</td>
+																	</tr>
+																	<tr>
+																		<td align="right" bgcolor="#FFFFFF">其他联系方式</td>
+																		<td bgcolor="#FFFFFF">{{result.othercontact}}</td>
+																	</tr>
+																	<tr>
+																		<td align="right" bgcolor="#FFFFFF">性别</td>
+																		<td bgcolor="#FFFFFF">{{result.sex}}</td>
+																	</tr>
+																	<tr>
+																		<td align="right" bgcolor="#FFFFFF">电子信箱</td>
+																		<td bgcolor="#FFFFFF">{{result.email}}</td>
+																	</tr>
+																	<tr>
+																		<td align="right" bgcolor="#FFFFFF">最高学历</td>
+																		<td bgcolor="#FFFFFF">{{result.education}}</td>
+																	</tr>
+																	<tr>
+																		<td align="right" bgcolor="#FFFFFF">工作年限</td>
+																		<td bgcolor="#FFFFFF">{{result.worklonger}}</td>
+																	</tr>
+																	<tr>
+																		<td align="right" bgcolor="#FFFFFF">简历来源</td>
+																		<td bgcolor="#FFFFFF">{{result.laiyuan}}</td>
+																	</tr>
+
+																	<tr>
+																		<td align="right" bgcolor="#FFFFFF"> 联系状态 </td>
+																		<td bgcolor="#FFFFFF" >
+																			<select name="contactstat" id="contactstat">
+																				<option value="">请选择...</option>
+																				<option value="1501">在职中</option>
+																				<option value="150101">求职中</option>
+																				<option value="150201">短期不求职</option>
+																			</select>
+																		</td>
+
+																	</tr>
+																	<tr>
+																		<td align="right" bgcolor="#FFFFFF">必须选择一个记录</td>
+
+																		<td bgcolor="#FFFFFF">
+																			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td width="20"><input type="radio" name="selectjl" id="selectjl" value="1"></td>
+																						<td width="60" align="right">邀约记录</td>
+																						<td>
+																							<select name="jl1" id="jl1">
+																								<option value="">请选择...</option>
+																								<option value="1705">确定面试</option>
+																								<option value="1706">无意向</option>
+																								<option value="1707">电话未接待跟进</option>
+																								<option value="1708">考虑中需跟进</option>
+																								<option value="1709">淘汰</option>
+																							</select>
+																						</td>
+
+																					</tr>
+																					<tr>
+																						<td><input type="radio" name="selectjl" id="selectjl" value="2"></td>
+																						<td align="right">初试记录</td>
+																						<td>
+																							<select name="jl2" id="jl2">
+																								<option value="">请选择...</option>
+																								<option value="1801">放弃面试</option>
+																								<option value="1802">录用</option>
+																								<option value="1803">建议复试</option>
+																								<option value="1804">淘汰</option>
+																								<option value="1805">储备</option>
+																							</select>
+																						</td>
+
+																					</tr>
+																					<tr>
+																						<td><input type="radio" name="selectjl" id="selectjl" value="3"></td>
+																						<td align="right">复试记录</td>
+																						<td>
+																							<select name="jl3" id="jl3">
+																								<option value="">请选择...</option>
+																								<option value="1901">录用</option>
+																								<option value="1902">淘汰</option>
+																								<option value="1903">储备</option>
+																							</select>
+																						</td>
+
+																					</tr>
+																					<tr>
+																						<td><input type="radio" name="selectjl" id="selectjl" value="4"></td>
+																						<td align="right">报到记录</td>
+																						<td>
+																							<select name="jl4" id="jl4">
+																								<option value="">请选择...</option>
+																								<option value="2001">跟进中</option>
+																								<option value="2002">报到</option>
+																								<option value="2003">放弃报到</option>
+																							</select>
+																						</td>
+
+																					</tr>
+																					<tr>
+																						<td><input type="radio" name="selectjl" id="selectjl" value="5"></td>
+																						<td align="right">过程结束</td>
+																						<td>
+																							<select name="jl5" id="jl5">
+																								<option value="">请选择...</option>
+																								<option value="2101">流程结束</option>
+																								<option value="2102">储备人才</option>
+																							</select>
+																						</td>
+
+																					</tr>
+																				</tbody>
+																			</table>
+																		</td>
+																	</tr>
+
+																	<tr>
+																		<td align="right" bgcolor="#FFFFFF">星级</td>
+																		<td bgcolor="#FFFFFF"><input type="radio" name="star" id="radio" value="5">
+																			<input type="image" name="imageField" id="imageField" src="http://192.168.2.2/admin1/newimages/art1.gif">
+																			<input type="image" name="imageField2" id="imageField2" src="http://192.168.2.2/admin1/newimages/art1.gif">
+																			<input type="image" name="imageField3" id="imageField3" src="http://192.168.2.2/admin1/newimages/art1.gif">
+																			<input type="image" name="imageField4" id="imageField4" src="http://192.168.2.2/admin1/newimages/art1.gif">
+																			<input type="image" name="imageField5" id="imageField5" src="http://192.168.2.2/admin1/newimages/art1.gif">
+																			<input type="radio" name="star" id="star" value="4">
+																			<input type="image" name="imageField6" id="imageField6" src="http://192.168.2.2/admin1/newimages/art1.gif">
+																			<input type="image" name="imageField6" id="imageField7" src="http://192.168.2.2/admin1/newimages/art1.gif">
+																			<input type="image" name="imageField6" id="imageField8" src="http://192.168.2.2/admin1/newimages/art1.gif">
+																			<input type="image" name="imageField6" id="imageField9" src="http://192.168.2.2/admin1/newimages/art1.gif">
+																			<input type="radio" name="star" id="star" value="3">
+																			<input type="image" name="imageField7" id="imageField10" src="http://192.168.2.2/admin1/newimages/art1.gif">
+																			<input type="image" name="imageField7" id="imageField11" src="http://192.168.2.2/admin1/newimages/art1.gif">
+																			<input type="image" name="imageField7" id="imageField12" src="http://192.168.2.2/admin1/newimages/art1.gif">
+																			<input type="radio" name="star" id="star" value="2">
+																			<input type="image" name="imageField8" id="imageField13" src="http://192.168.2.2/admin1/newimages/art1.gif">
+																			<input type="image" name="imageField8" id="imageField14" src="http://192.168.2.2/admin1/newimages/art1.gif">
+																			<input type="radio" name="star" id="star" value="1">
+																			<input type="image" name="imageField9" id="imageField15" src="http://192.168.2.2/admin1/newimages/art1.gif"></td>
+																	</tr>
+
+																	<tr>
+																		<td align="right" bgcolor="#FFFFFF">下次面谈时间</td>
+																		<td bgcolor="#FFFFFF" style="cursor:pointer">
+																			<script language="javascript">
+																				createDatePicker("nextteltime", false, "", false, false, false, true)
+																			</script>
+																		</td>
+																	</tr>
+
+																	<tr align="center">
+																		<td align="right" bgcolor="#FFFFFF">联系小计</td>
+																		<td align="left" bgcolor="#FFFFFF"><textarea name="bz" id="bz" cols="45" rows="5"></textarea></td>
+																	</tr>
+																	<tr align="center">
+																		<td colspan="2" bgcolor="#FFFFFF">
+																			<input name="Submit" type="submit" class="button01-out" value="提交">
+																			<input name="Submit2" type="reset" class="button01-out" value="重置">
+																		</td>
+																	</tr>
+
+																</tbody>
+															</form>
+														</table>
+														<table width="100%" border="0" cellspacing="0" cellpadding="5">
+															<tbody>
+																<tr>
+																	<td bgcolor="#CCCCCC">联系小计</td>
+																</tr>
+															</tbody>
+														</table>
+
+														<table width="100%" border="0" cellspacing="0" cellpadding="0">
+															<tr>
+																<td>
+																	<iframe id=topt name=topt style="HEIGHT: 200px; VISIBILITY: inherit; WIDTH: 100%; Z-INDEX: 2" frameborder="0" src="usershow_history.html?uid={{result.id}}"></iframe>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td height="6"> </td>
+				</tr>
+			</tbody>
+		</table>
+
+	</body>
+
+</html>
