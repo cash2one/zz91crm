@@ -35,6 +35,7 @@ def gd_list(request):
     if index:
         searchlist['index']=index
     company_id=request.session.get('company_id')
+    company_id=123
     if company_id:
         searchlist['company_id']=company_id
     funpage=zz91page()
@@ -61,6 +62,7 @@ def gd_list(request):
 #添加工单
 def gd_add(request):
     company_id=request.session.get('company_id',default=None)
+    company_id=123
     if request.method=="POST":
         question=request.POST.get('question')
         question_kind=request.POST.get('question_kind')

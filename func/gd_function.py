@@ -30,7 +30,7 @@ class zzgd:
             for list in listall:
                 time=list['question_time']
                 list['question_time']=formattime(time,flag=2)
-            return {'count':count,'list':listall}
+            return {'count':count,'list':listall,'index':index}
         else:#工作人员登陆
             sqlcount="select count(0) as count from gd_question where id>0 "+sqls+""
             count=db.fetchonedb(sqlcount,argument)['count']
