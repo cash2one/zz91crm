@@ -90,7 +90,13 @@ urlpatterns += patterns('zz91crm.gd',
 	(r'^gd/station_com.html$','gd_station'),#工单状态
 	(r'^gd/answer_com.html$','gd_answer'),#回复
 )
-
+#新闻模块
+urlpatterns += patterns('zz91crm.news',
+	(r'^news/list.html$','news_list'),#所有新闻
+	(r'^news/add.html$','news_add'),#添加新闻
+	(r'^news/mod.html$','news_mod'),#工单详情
+	(r'^news/del.html$','news_del'),#工单状态
+	)
 #我的客户（再生通）
 urlpatterns += patterns('zz91crm.icdlist',
 	#---我的所有客户（再生通）

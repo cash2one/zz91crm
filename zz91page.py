@@ -59,22 +59,20 @@ class zz91page:
 		self._page_listcount=int(ceil(self._listcount / self._limitNum))+1
 		return int(ceil(self._listcount / self._limitNum))+1
 		
-	
 	def firstpage(self):
-		if (self._page_listcount>=1 and self._nowpage>=1):
+		if (self._page_listcount>=1 and self._nowpage==1):
 			self._firstpage=1
 			return 1
 		else:
 			self._firstpage=None
 			return None
-	
 	def lastpage(self):
-		if (self._page_listcount >= 1 and self._nowpage <= self._page_listcount):
-			self._lastpage=1
-			return 1
-		else:
+		if (self._page_listcount >= 1 and self._nowpage < self._page_listcount):
 			self._lastpage=None
 			return None
+		else:
+			self._lastpage=1
+			return 1
 	def page_range(self):
 		page_rangep=[]
 		i=1
@@ -99,5 +97,3 @@ class zz91page:
 	def prvpage(self):
 		self._prvpage=self._nowpage-1
 		return self._nowpage-1
-		
-		
