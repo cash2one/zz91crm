@@ -129,6 +129,7 @@ def gd_details(request):
             time=list['time']
             list['time']=formattime(time,flag=2)
         company_id=request.session.get('company_id')
+        company_id=123
         if company_id:
             return render_to_response('gd/gd_details_com.html',locals())
         else:

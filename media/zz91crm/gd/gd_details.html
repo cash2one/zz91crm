@@ -3,13 +3,11 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>工单详情</title>
-        {% load staticfiles %}
 	</head>
 	<body>问题描述：
 		{%for list in result%}
 			<tr>{{list.company_id}}:{{list.question}}</tr><br />
 			<a style="font-size:10px">{{list.time}}</a>
-            <!--<img src="{% static "{{ list.filename }}" %}" alt="{{ list.filename }}" width="200" height="200">-->
             <hr />
 		{%endfor%}
 		<form action="answer.html?question_id={{result1.id}}&company_id={{result1.company_id}}" enctype="multipart/form-data" method="post">

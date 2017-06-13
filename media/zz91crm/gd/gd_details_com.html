@@ -84,11 +84,6 @@
 				</li>
 				<hr /> 
 				{% endfor %}
-				<form action="answer_com.html?question_id={{result1.id}}&company_id={{result1.company_id}}" enctype="multipart/form-data" method="post">
-					<textarea name="answer" cols="150" rows="4" placeholder="回复内容"></textarea><br />
-					<input type="file" name="fileField" id="fileField"><br />
-					<input type="submit" value="回复" />
-				</form>
 			</ul>
 		</div>
 		<form action="answer_com.html?question_id={{result1.id}}&company_id={{result1.company_id}}" enctype="multipart/form-data" method="post">
