@@ -10,6 +10,13 @@ def opendb():
                               db='zz91crm',use_unicode=False,charset='utf8')
     return __pool.connection()
 
+def opendb1():
+    #db = MySQLdb.connect(user='zz91crm', db='zz91crm', passwd='zJ88friend', host='192.168.2.4', charset="utf8")
+    __pool = PooledDB(creator=MySQLdb, mincached=1 , maxcached=5 ,maxconnections=5,maxshared=10,
+                              host='192.168.2.4' , port=3306 , user='zz91crm' , passwd='zJ88friend',
+                              db='astoweb',use_unicode=False,charset='utf8')
+    return __pool.connection()
+
 def opendbserver():
     __pool = PooledDB(creator=MySQLdb, mincached=1 , maxcached=5 ,maxconnections=5,maxshared=10,
                               host='rdsuo5342fhte95enp5ipublic.mysql.rds.aliyuncs.com' , port=3398 , user='kang' , passwd='zjpuwei003',
@@ -27,6 +34,8 @@ class crmdb:
     def __init__(self,dbtype=""):
         if not dbtype:
             self.conn=opendb()
+        if dbtype=="astoweb":
+            self.conn=opendb1()
         if dbtype=="local":
             self.conn=opendb()
         if dbtype=="server":

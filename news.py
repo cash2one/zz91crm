@@ -3,11 +3,11 @@ from django.shortcuts import render_to_response,render
 from django.http import HttpResponse,HttpResponseRedirect
 import simplejson,sys,os,urllib,re,datetime,time,md5,hashlib,random,calendar
 import calendar as cal
-from conn1 import crmdb
+from conn import crmdb
 from zz91page import *
 from sphinxapi import *
 from settings import searchconfig
-db=crmdb()
+db=crmdb("astoweb")
 reload(sys)
 sys.setdefaultencoding('UTF-8')
 nowpath=os.path.dirname(__file__)
@@ -23,27 +23,13 @@ def news_list(request):
     page=request.GET.get('page')
     if not page:
         page=1
-    searchlist={}
-    star=request.GET.get("star")
-    if star:
-         searchlist['star']=star
-    username=request.GET.get("username")
-    if username:
-        searchlist['username']=username
-    mobile=request.GET.get("mobile")
-    if mobile:
-        searchlist['mobile']=mobile
-    email=request.GET.get("email")
-    if email:
-        searchlist['email']=email
-    
     funpage=zz91page()
     limitNum=funpage.limitNum(15)
     nowpage=funpage.nowpage(int(page))
     frompageCount=funpage.frompageCount()
     after_range_num = funpage.after_range_num(3)
     before_range_num = funpage.before_range_num(6)
-    userallr=zzs.getnewslist(frompageCount=frompageCount,limitNum=limitNum,searchlist=searchlist)
+    userallr=zzs.getnewslist(frompageCount=frompageCount,limitNum=limitNum)
     listcount=userallr['count']
     listall=userallr['list']
     listcount = funpage.listcount(listcount)
@@ -57,26 +43,28 @@ def news_list(request):
 #添加新闻
 def news_add(request):
     subject=request.POST.get('subject')
-    hit=request.POST.get('hit')
+    keyword=request.POST.get('keyword')
+    content=request.POST.get('content')
     if subject:
-        sql='insert into bz_article(subject,hit) values(%s, %s)'
-        result=db.updatetodb(sql,[subject,hit])
+        sql='insert into bz_article(subject,keyword,content) values(%s, %s, %s)'
+        result=db.updatetodb(sql,[subject,keyword,content])
         return HttpResponseRedirect('list.html')
     return render(request,'news/news_add.html')
 #修改新闻
 def news_mod(request):
     if request.method=="POST":
-        aid=request.GET.get('aid')
         subject=request.POST.get('subject')
-        hit=request.POST.get('hit')
+        keyword=request.POST.get('keyword')
+        content=request.POST.get('content')
+        aid=request.POST.get('aid')
         if subject:
-            sql='update bz_article set subject=%s,hit=%s where aid=%s'
-            result=db.updatetodb(sql,[subject,hit,aid])
+            sql='update bz_article set subject=%s,keyword=%s,content=%s where aid=%s'
+            result=db.updatetodb(sql,[subject,keyword,content,aid])
         return HttpResponseRedirect('list.html')
     else:
         aid=request.GET.get('aid')
         if aid:
-            sql='select subject,hit from bz_article where aid=%s'
+            sql='select subject,keyword,content from bz_article where aid=%s'
             result=db.fetchonedb(sql,[aid])
             return render_to_response('news/news_mod.html',locals())
 #删除新闻
@@ -87,9 +75,9 @@ def news_del(request):
         result=db.updatetodb(sql,[aid])
         return HttpResponseRedirect('list.html')
 #批量删除
-def hr_delall(request):
+def news_delall(request):
     check_box_list = request.REQUEST.getlist("check_box_list")
-    for id in check_box_list:
-        sql='delete from renshi_user where id=%s'
-        result=db.updatetodb(sql,[id])
+    for aid in check_box_list:
+        sql='delete from bz_article where aid=%s'
+        result=db.updatetodb(sql,[aid])
     return HttpResponseRedirect('list.html')

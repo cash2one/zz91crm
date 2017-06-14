@@ -8,48 +8,93 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" href="//res.layui.com/layui/build/css/layui.css" media="all">
+		<style>
+			table {
+				table-layout: fixed;
+			}
+			
+			td {
+				width: 100%;
+				word-break: keep-all;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		</style>
+		<script src="//res.layui.com/layui/build/layui.js" charset="utf-8"></script>
+		<script>
+			layui.use('form', function() {
+				var $ = layui.jquery,
+					form = layui.form();
+
+				//全选
+				form.on('checkbox(allChoose)', function(data) {
+					var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
+					child.each(function(index, item) {
+						item.checked = data.elem.checked;
+					});
+					form.render('checkbox');
+				});
+
+			});
+
+			function CheckAll(form) {
+				for(var i = 0; i < form.elements.length; i++) {
+					var e = form.elements[i];
+					if(e.name.substr(0, 14) == 'check_box_list')
+						e.checked = form.cball.checked;
+				}
+			}
+		</script>
 	</head>
 
 	<body>
 		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
 			<legend>新闻</legend>
 		</fieldset>
-		<form action="/news/add.html" method="get">
-			<div class="layui-form-item">
-				<div class="layui-input-block">
-					<button class="layui-btn" lay-submit="" lay-filter="demo1">添加</button>
-				</div>
-			</div>
-		</form>
 		<div class="layui-form">
-			<table class="layui-table">
-				<colgroup>
-					<col>
-					<col width="80">
-					<col width="100">
-				</colgroup>
-				<thead>
-					<tr>
-						<td>新闻</td>
-						<td>点击量</td>
-						<td>操作</td>
-					</tr>
-				</thead>
-				<tbody>
-					{%for list in listall%}
-					<tr>
-						<td>
-							<a href="">{{list.subject}}</a>
-						</td>
-						<td>{{list.hit}}</td>
-						<td>
-							<span><a href="mod.html?aid={{list.aid}}">修改</a></span>
-							<span><a href="del.html?aid={{list.aid}}" onclick="return confirm('确实要删除吗？')">删除</a></span>
-						</td>
-					</tr>
-					{%endfor%}
-				</tbody>
-			</table>
+			<form action="/news/delall.html" method="post" style="display: inline;">
+
+				<table class="layui-table" style="table-layout:fixed; overflow:hidden;">
+					<colgroup>
+						<col width="10">
+						<col width="200">
+						<col width="60">
+						<col width="20">
+					</colgroup>
+					<thead>
+						<tr>
+							<th></th>
+							<th>标题</th>
+							<th>关键字</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						{%for list in listall%}
+						<tr>
+							<td><input name="check_box_list" type="checkbox" value="{{list.aid}}" style="display: inline; cursor: pointer;">
+							</td>
+							<td title="{{list.subject}}" style="cursor: pointer;">
+								<a href="">{{list.subject}}</a>
+							</td>
+							<td title="{{list.keyword}}" style="cursor: pointer;">{{list.keyword}}</td>
+							<td style="cursor: pointer;">
+								<span><a href="mod.html?aid={{list.aid}}">修改</a></span>
+								<span><a href="del.html?aid={{list.aid}}" onclick="return confirm('确实要删除吗？')">删除</a></span>
+							</td>
+						</tr>
+						{%endfor%}
+					</tbody>
+				</table>
+				&nbsp;&nbsp;&nbsp;
+				<input name="cball" type="checkbox" value="" onclick="CheckAll(this.form)" style="display: inline;"> 全选
+				<button class="layui-btn layui-btn-mini" type="submit" onclick="return confirm('确定要删除吗？')">删除</button>
+			</form>
+			<form action="/news/add.html" method="get" style="display: inline;">
+				<button class="layui-btn layui-btn-mini" type="submit">添加</button>
+			</form>
+
 		</div>
 		<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">

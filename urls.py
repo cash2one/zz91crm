@@ -96,6 +96,7 @@ urlpatterns += patterns('zz91crm.news',
 	(r'^news/add.html$','news_add'),#添加新闻
 	(r'^news/mod.html$','news_mod'),#工单详情
 	(r'^news/del.html$','news_del'),#工单状态
+	(r'^news/delall.html$','news_delall'),
 	)
 #我的客户（再生通）
 urlpatterns += patterns('zz91crm.icdlist',
